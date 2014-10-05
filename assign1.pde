@@ -7,10 +7,14 @@ int y = 440;
 int w = 150;
 int h = 50;
 
-// declare variables
+int slotPosition=int (random(3));
+int fruitId=int (random(6));
+int getSlotScore=int (random(6)+1)*10;
+float p;
+
 // --------------------------------------------
 // put your code inside here
-int totalScore = 0;
+int totalScore =500;
 
 // --------------------------------------------
 
@@ -18,6 +22,7 @@ void setup() {
   size(640,480);
   textFont(createFont("fonts/Square_One.ttf", 20));
   machine = new SlotMachine();
+  
 }
 
 void draw() {
@@ -40,17 +45,16 @@ void draw() {
   text("Slot Machine",x,49);
   textSize(20);
   text("Score"+" "+":"+" "+totalScore,x, 89);
-  
+ 
+
+int score;
   // event handler
   if (button) {
     if (!rolling){
       rolling = true;
-      // start rolling
-      // -------------------------------------------------
-      // put your code inside here
+     
+      totalScore-=50;
       
-      
-      // -------------------------------------------------
     }
     machine.roll();
     textSize(19);
@@ -60,12 +64,33 @@ void draw() {
     if (rolling){
       rolling = false;
       // stop rolling
-      // -------------------------------------------------
-      // put your code inside here
+      int a = int(random(6));
+       
+        int b = int(random(6));
       
- 
- 
- 
+        int c= int(random(6));
+     
+        
+      machine.setSlotFruit(0,a);
+      machine.setSlotFruit(1,b);
+      machine.setSlotFruit(2,c);
+      
+     machine.getFruitCount(a);
+     machine.getFruitCount(b);
+     machine.getFruitCount(c);
+
+     int scoreFir=machine.getFruitCount(0)*machine.getFruitCount(0)* machine.getSlotScore(0);
+     int scoreSec=machine.getFruitCount(1)*machine.getFruitCount(1)* machine.getSlotScore(1);
+     int scoreThir=machine.getFruitCount(2)*machine.getFruitCount(2)* machine.getSlotScore(2);
+     int scoreFour=machine.getFruitCount(3)*machine.getFruitCount(3)* machine.getSlotScore(3);
+     int scoreFif=machine.getFruitCount(4)*machine.getFruitCount(4)* machine.getSlotScore(4);
+     int scoreSix=machine.getFruitCount(5)*machine.getFruitCount(5)* machine.getSlotScore(5);
+      
+      int scoreX=(scoreFir+scoreSec+scoreThir+scoreFour+scoreFif+scoreSix);
+
+       totalScore+=scoreX;
+       println(totalScore);
+
       
       // -------------------------------------------------
     }
@@ -83,7 +108,6 @@ void mousePressed() {
     button = !button;
   }  
 }
-
 
 
 
